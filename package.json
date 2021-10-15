@@ -1,0 +1,17 @@
+{
+  "name": "webchat-widget",
+  "version": "1.0.0",
+  "description": "Create a Web Chat Widget",
+  "main": "index.js",
+  "scripts": {
+    "serve": "copyfiles --flat src/assets/*.png dist/assets && parcel serve src/index.html",
+    "prebuild": "rmdir dist /s /q"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "copyfiles": "^2.4.1",
+    "parcel": "^2.0.0"
+  }
+}
