@@ -1,2 +1,2 @@
 # webchat-widget
-Create a Web Chat Widget
+Web Chat Widget
