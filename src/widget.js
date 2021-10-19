@@ -114,6 +114,70 @@ export class Widget {
         const container_msgs = document.createElement('div');
         container_msgs.classList.add('msgs');
 
+        //Mensaje de Entrada (sample) -------- 1
+        var messagein = document.createElement('div');
+        messagein.classList.add('message');
+
+        //Contenedor del Avatar
+        var msgavatar = document.createElement('div');
+        msgavatar.classList.add('avatar');
+
+        //Avatar
+        var msgavatar_logo = document.createElement('img');
+        msgavatar_logo.src = 'http://placeimg.com/64/64/any';
+
+        msgavatar.appendChild(msgavatar_logo);
+
+        //Contenedor principal del Mensaje (Burbuja)
+        var msgbubble = document.createElement('div');
+        msgbubble.classList.add('bubble-container');
+        
+        //Burbuja
+        var msgbubble_text = document.createElement('div');
+        msgbubble_text.classList.add('bubble');
+        msgbubble_text.textContent = '¿Hola que tal buenas tardes, hay algo en lo que te pueda ayudar?';
+
+        msgbubble.appendChild(msgbubble_text);
+
+        messagein.appendChild(msgavatar);
+        messagein.appendChild(msgbubble);
+
+        //EL mensaje se agrega al contenedor de los mensajes
+        container_msgs.appendChild(messagein);
+        // ---------------
+
+         //Mensaje de Entrada (sample) -------- 2
+         messagein = document.createElement('div');
+         messagein.classList.add('message');
+ 
+         //Contenedor del Avatar
+         msgavatar = document.createElement('div');
+         msgavatar.classList.add('avatar', 'out');
+ 
+         //Avatar
+         msgavatar_logo = document.createElement('img');
+         msgavatar_logo.src = 'http://placeimg.com/64/64/any';
+ 
+         msgavatar.appendChild(msgavatar_logo);
+ 
+         //Contenedor principal del Mensaje (Burbuja)
+         msgbubble = document.createElement('div');
+         msgbubble.classList.add('bubble-container', 'out');
+         
+         //Burbuja
+         msgbubble_text = document.createElement('div');
+         msgbubble_text.classList.add('bubble', 'out');
+         msgbubble_text.textContent = 'Hola, buenas tardes, si porfavor, tengo duda si el deposito hecho por el atrasado a mi mensualidad ya lo resivieron, ya que tengo el servicio aun suspendido.';
+ 
+         msgbubble.appendChild(msgbubble_text);
+ 
+         messagein.appendChild(msgavatar);
+         messagein.appendChild(msgbubble);
+ 
+         //EL mensaje se agrega al contenedor de los mensajes
+         container_msgs.appendChild(messagein);
+         // ---------------
+
         container.appendChild(container_msgs);
 
         //Establece el contenedor de herramientas del chat, caja de escritura, adjuntos y boton de envio
@@ -127,12 +191,35 @@ export class Widget {
         //Input para escribir mensaje
         const control_input = document.createElement('div');
         control_input.classList.add('control-input');
-        control_input.textContent = 'Hola';
+
+        //Control de escritura del mensaje
+        const msg_input = document.createElement('textarea');
+        msg_input.id = 'txtmsg';
+        msg_input.placeholder = 'Escriba aqui su mensaje ...';
+        msg_input.rows = 3;
+        msg_input.maxLength = 200;
+        msg_input.cols = 35;
+
+        control_input.appendChild(msg_input);
 
         //Botones de Attach y Envio
         const control_buttons = document.createElement('div');
         control_buttons.classList.add('control-buttons');
-        control_buttons.textContent = 'Guapito';
+
+        //Control de adjuntos
+        const attach_button = document.createElement('button');
+        attach_button.id = 'btnattach';
+        attach_button.type = 'button';
+        attach_button.classList.add('btn', 'attach');
+
+        //Control de envio
+        const send_button = document.createElement('button');
+        send_button.id = 'btnsend';
+        send_button.type = 'button';
+        send_button.classList.add('btn', 'send');
+
+        control_buttons.appendChild(attach_button);
+        control_buttons.appendChild(send_button);
 
         tools_controls.appendChild(control_input);
         tools_controls.appendChild(control_buttons);
@@ -257,6 +344,47 @@ export class Widget {
                 flex-direction: column;
                 padding: 3px 5px 0px;
             }
+            .message-container .container .msgs .message {
+                display: flex;
+                background-color: white;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .message-container .container .msgs .avatar {
+                display: flex;
+                background-color: white;
+                justify-content: center;
+                padding: 0 3px 0;
+            }
+            .message-container .container .msgs .avatar.out {
+                display: none;
+            }
+            .message-container .container .msgs .avatar img {
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+            }
+            .message-container .container .msgs .bubble-container {
+                display: flex;
+                flex: auto;
+                background-color: white;
+            }
+            .message-container .container .msgs .bubble-container.out {
+                justify-content: flex-end;
+            }
+            .message-container .container .msgs .bubble-container .bubble {
+                padding: 10px 15px;
+                max-width: 80%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                border-radius: 8px;
+                background-color: #ECEDEF;
+                color: black;
+                font-size: 13px;
+            }
+            .message-container .container .msgs .bubble-container .bubble.out {
+                background-color: #C8E6C9;
+            }
             .message-container .container .tools {
                 display: flex;
                 background-color: white;
@@ -266,23 +394,50 @@ export class Widget {
             }
             .message-container .container .controls {
                 display: flex;
-                background-color: green;
+                background-color: white;
                 height: 65%;
                 padding: 0px 5px 5px;
             }
             .message-container .container .controls .control-input {
                 display: flex;
-                background-color: purple;
+                background-color: white;
                 width: 78%;
+            }
+            .message-container .container .controls .control-input textarea {
+                padding:15px;
+                border: none;
+                outline: none;
+                resize: none;
+            }
+            .message-container .container .controls .control-input textarea::placeholder {
+                font-family: Helvetica, Arial ,sans-serif;
             }
             .message-container .container .controls .control-buttons {
                 display: flex;
-                background-color: magenta;
+                background-color: white;
                 flex: auto;
+                align-items: center;
+                justify-content: center;
+            }
+            .message-container .container .controls .control-buttons .btn {
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                border: none;
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+                margin: 0 4px 0;
+            }
+            .message-container .container .controls .control-buttons .btn.attach {
+                background-image: url(assets/attach.png);
+            }
+            .message-container .container .controls .control-buttons .btn.send {
+                background-image: url(assets/send.png);
             }
             .message-container .container .sponsor {
                 display: flex;
-                background-color: blue;
+                background-color: white;
                 flex: auto;
             }
             .message-container form * {
